@@ -10,11 +10,11 @@
               
               if(length > 0) {
                 for(var i = 0; i < length; i++) {
-                  that.append(createMemberElement(response.data[i]));
+                  this.append(createMemberElement(response.data[i]));
                 }
               }
               else {
-                that.append(createEmptyElement());
+                this.append(createEmptyElement());
               }
             }
         };
@@ -67,7 +67,9 @@
       dataType: "jsonp",
       cache: false,
       url: composeRequestURL(),
-      success: settings.onComplete
+      success: function(response) {
+        settings.onComplete.apply(that, [response]);
+      }
     });
     
     return this;
